@@ -13,7 +13,7 @@ exports.getAllUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { username, email, password } = req.body;
 
         const existingUser = await user.findOne({ email});
         if (existingUser) {
@@ -24,7 +24,7 @@ exports.createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new user({
-            name,
+            username,
             email,
             password: hashedPassword
         });
